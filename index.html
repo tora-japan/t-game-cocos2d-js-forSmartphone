@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="robots" content="noindex">
+<meta name="robots" content="nofollow">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+
+<!--    <link rel="icon" type="image/GIF" href="res/favicon.ico"/>
+-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+
+    <meta name="full-screen" content="yes"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+
+    <style>
+        body, canvas, div {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          border: 0;
+padding: 0px;
+margin: 0px;
+        }
+
+    body{
+      color: #FFFFFF;
+      background-color: #777777
+    }
+
+    </style>
+    <title>t-game forSmartphone</title>
+</head>
+<body >
+    <canvas id="gameCanvas" width="450" height="800"></canvas>
+
+    <script type="text/javascript" src="cocos2d-js-v3.9.js" charset="UTF-8"></script>
+    <script type="text/javascript" charset="utf-8" src="js-input.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js-touch.js"></script>
+    <script type="text/javascript" charset="utf-8" src="main.js"></script>
+
+    <script type="text/javascript">
+
+    /* debug用 
+    var sock = new WebSocket('ws://192.168.0.10:5001');
+    sock.addEventListener('open',function(e){ console.log('Socket 接続成功'); });
+    */
+
+    window.onload = function(){
+      cc.game.onStart = function(){
+        // 画面をリサイズ
+        cc.view.adjustViewPort(true);
+        cc.view.setDesignResolutionSize(450, 800, cc.ResolutionPolicy.SHOW_ALL);
+        // cc.view.setDesignResolutionSize(480, 800, cc.ResolutionPolicy.SHOW_ALL);
+        cc.view.resizeWithBrowserSize(true);
+        //load resources
+        cc.LoaderScene.preload(["HelloWorld.png"], function () {
+          cc.director.runScene(new MySceneGame());
+          
+
+          
+
+        }, this);
+      };
+      cc.game.run("gameCanvas");
+    };
+  </script>
+
+</body>
+</html>
