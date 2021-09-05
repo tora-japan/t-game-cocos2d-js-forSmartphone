@@ -441,6 +441,7 @@ MySceneGame = cc.Scene.extend({
 
     // ゲームスピードを元に戻す
     tetrimino.dropSpeed = 0.02;
+    tetrimino.dropCounter = 0;
 
     this.next();
     this.next();
