@@ -432,15 +432,16 @@ MySceneGame = cc.Scene.extend({
       tetriminoLayer[i].number = tetrimino.number;
       tetriminoLayer[i].update();
     }
-
-
-
   },
   gameInit: function () {
     stage = [];
     for (let y = 0; y < stageClearPattern.length; y++) {
       stage.push(stageClearPattern[y].concat());
     }
+
+    // ゲームスピードを元に戻す
+    tetrimino.dropSpeed = 0.02;
+
     this.next();
     this.next();
     this.mainLayer.hideMessage();
@@ -474,6 +475,12 @@ MySceneGame = cc.Scene.extend({
         let lines = this.removeLine();        // ラインを消す
         if (lines != 0) {
           tetrimino.dropSpeed += 0.005;        // 消したのでちょっと早くする
+
+          // テトリス（4ライン消し）の場合、落下速度を少し遅くする
+          if(lines==4) {
+            tetrimino.dropSpeed -=0.01;
+            if(tetrimino.dropSpeed<0.02) tetrimino.dropSpeed=0.02;
+          }
         }
         this.next();                          // 次にセットする
         if (this.isHit()) {                    // セットした位置で動けない場合はゲームオーバー
